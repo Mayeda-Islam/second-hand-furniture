@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from '../../assests/logo.png'
 const NavBar = () => {
   return (
@@ -26,45 +27,26 @@ const NavBar = () => {
               tabIndex={1}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
               <li tabIndex={1}>
-                <a className="justify-between">
-                  Parent
-                  <svg
-                    className="fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                  </svg>
-                </a>
+              <Link to='blogs'>Blogs</Link>
                 <ul className="p-2">
                   <li>
-                    <a>Submenu 1</a>
+                 
                   </li>
                   <li>
-                    <a>Submenu 2</a>
+                   <Link to='blogs'>Blogs</Link>
                   </li>
                 </ul>
               </li>
               <li>
                 <a>Item 3</a>
               </li>
-              <li>
-                  <a className="justify-between">
-                    Profile
-                    
-                  </a>
+              
+                <li>
+                  <Link to='/login'>Sign In</Link>
                 </li>
                 <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a>Logout</a>
+                  <a>Log Out</a>
                 </li>
             </ul>
           </div>
@@ -74,26 +56,24 @@ const NavBar = () => {
           <div className="dropdown dropdown-end">
             <div className="navbar-center hidden lg:flex">
               <ul className="menu menu-horizontal px-1">
-                <li>
-                  <a>Item 1</a>
-                </li>
+                
                 <li tabIndex={0}>
-                  <a>Parent</a>
+                <Link to='blogs'>Blogs</Link>
                 </li>
                 <li>
                   <a>Item 3</a>
                 </li>
                 <li>
                   <a className="justify-between">
-                    Profile
+                    Sign Up
                     
                   </a>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <Link to='/login'>Sign In</Link>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <a>Log Out</a>
                 </li>
               </ul>
             </div>
