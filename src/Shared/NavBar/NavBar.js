@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from '../../assests/logo.png'
+import { AuthContext } from "../../context/Auth/AuthProvider";
 const NavBar = () => {
+  const {user,logOut}=useContext(AuthContext)
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   return (
     <div className="container mx-auto ">
       <div className="navbar bg-primary">
@@ -42,12 +53,16 @@ const NavBar = () => {
                 <a>Item 3</a>
               </li>
               
+              {
+                user?.email? <li>
+                <button onClick={handleLogOut}>Log out</button>
+              </li>:
                 <li>
-                  <Link to='/login'>Sign In</Link>
-                </li>
-                <li>
-                  <a>Log Out</a>
-                </li>
+                <Link to='/login'>Sign In</Link>
+              </li>
+              }
+                
+               
             </ul>
           </div>
           <img src={logo} className='w-20' alt="" />
@@ -63,18 +78,15 @@ const NavBar = () => {
                 <li>
                   <a>Item 3</a>
                 </li>
+                
+                {
+                user?.email? <li>
+                <button onClick={handleLogOut}>Log out</button>
+              </li>:
                 <li>
-                  <a className="justify-between">
-                    Sign Up
-                    
-                  </a>
-                </li>
-                <li>
-                  <Link to='/login'>Sign In</Link>
-                </li>
-                <li>
-                  <a>Log Out</a>
-                </li>
+                <Link to='/login'>Sign In</Link>
+              </li>
+              }
               </ul>
             </div>
 

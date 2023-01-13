@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/Auth/AuthProvider";
 
 const LogIn = () => {
   const { register, handleSubmit } = useForm();
+  const{signIn}=useContext(AuthContext)
+  const navigate=useNavigate()
   const handleRegister = (data) => {
-    alert("working");
-    console.log(data);
+    signIn(data.email,data.password)
+    .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        navigate('/')
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
   return (
     <div className=" h-[100vh] container mx-auto bg-white flex items-center justify-center">
