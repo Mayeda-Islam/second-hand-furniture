@@ -1,4 +1,5 @@
 import React from "react";
+import BookNowModal from "./BookNowModal/BookNowModal";
 
 const CategoryProductDetails = ({ product }) => {
   const { productName, location, originalPrice, resalePrice, yearsOfUse, img } =
@@ -25,6 +26,7 @@ const CategoryProductDetails = ({ product }) => {
           
           </div>
         </div>
+        <BookNowModal productName={productName} location={location} resalePrice={resalePrice}></BookNowModal>
       </div>
     </div>
   );

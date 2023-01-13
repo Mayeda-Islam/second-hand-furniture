@@ -10,7 +10,7 @@ const CategoryProduct = () => {
             <div className=' grid grid-cols-2'>
                 {categoryProduct.map(product=><CategoryProductDetails product={product} key={product._id}></CategoryProductDetails>)}
             </div>
-            <BookNowModal></BookNowModal>
+            
         </div>
     );
 };

@@ -1,13 +1,17 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth/AuthProvider";
+import { googleProvider } from "../../firebase/firebase.config";
 
 const LogIn = () => {
   const { register, handleSubmit } = useForm();
-  const{signIn}=useContext(AuthContext)
+  const{signIn,signInWithGoogle}=useContext(AuthContext)
   const navigate=useNavigate()
+  const location=useLocation()
+  const from = location.state?.from?.pathname || "/";
   const handleRegister = (data) => {
     signIn(data.email,data.password)
     .then((userCredential) => {
@@ -21,6 +25,21 @@ const LogIn = () => {
         const errorMessage = error.message;
       });
   };
+  const hanldeSignInGoogle=()=>{
+    signInWithGoogle(googleProvider)
+    .then((result) => {
+   
+        const user = result.user;
+        navigate(from,{replace:true})
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+        // ...
+      });
+  }
   return (
     <div className=" h-[100vh] container mx-auto bg-white flex items-center justify-center">
       <div class="flex  md:w-1/2 lg:w-full justify-center py-10 items-center bg-white">
@@ -94,7 +113,7 @@ const LogIn = () => {
             </span>
           </form>
           <button
-          
+          onClick={hanldeSignInGoogle}
             class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
           >
             Google Sign In

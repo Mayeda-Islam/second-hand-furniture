@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import logo from '../../assests/logo.png'
+import logo from "../../assests/logo.png";
 import { AuthContext } from "../../context/Auth/AuthProvider";
+import avatar from "../../assests/avatar.svg";
 const NavBar = () => {
-  const {user,logOut}=useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -39,95 +40,99 @@ const NavBar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li tabIndex={1}>
-              <Link to='blogs'>Blogs</Link>
+                <Link to="blogs">Blogs</Link>
                 <ul className="p-2">
+                  <li></li>
                   <li>
-                 
-                  </li>
-                  <li>
-                   <Link to='blogs'>Blogs</Link>
+                    <Link to="blogs">Blogs</Link>
                   </li>
                 </ul>
               </li>
-              <li>
-                <a>Item 3</a>
+
+              <li tabIndex={0}>
+                <a>
+                  Option
+                  <svg
+                    className="fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                  </svg>
+                </a>
+                <ul className="p-2">
+                  <li>
+                    <a>Seller</a>
+                  </li>
+                  <li>
+                    <a>Buyer</a>
+                  </li>
+                </ul>
               </li>
-              
-              {
-                user?.email? <li>
-                <button onClick={handleLogOut}>Log out</button>
-              </li>:
+              <li><Link to={'/orders'}>Orders</Link></li>
+              <li><Link to={'/dashBoard'}>DashBoard</Link></li>
+              {user?.email ? (
                 <li>
-                <Link to='/login'>Sign In</Link>
-              </li>
-              }
-                
-               
+                  <button onClick={handleLogOut}>Log out</button>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/login">Sign In</Link>
+                </li>
+              )}
             </ul>
           </div>
-          <img src={logo} className='w-20' alt="" />
+          <img src={logo} className="w-20" alt="" />
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
             <div className="navbar-center hidden lg:flex">
               <ul className="menu menu-horizontal px-1">
-                
                 <li tabIndex={0}>
-                <Link to='blogs'>Blogs</Link>
+                  <Link to="blogs">Blogs</Link>
                 </li>
-                <li>
-                  <a>Item 3</a>
+                <li tabIndex={0}>
+                  <a>
+                    Option
+                    <svg
+                      className="fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                    </svg>
+                  </a>
+                  <ul className="p-2">
+                    <li>
+                      <a>Seller</a>
+                    </li>
+                    <li>
+                      <a>Buyer</a>
+                    </li>
+                  </ul>
                 </li>
-                
-                {
-                user?.email? <li>
-                <button onClick={handleLogOut}>Log out</button>
-              </li>:
-                <li>
-                <Link to='/login'>Sign In</Link>
-              </li>
-              }
+                <li><Link to={'/orders'}>Orders</Link></li>
+              <li><Link to={'/dashBoard'}>DashBoard</Link></li>
+                {user?.email ? (
+                  <li>
+                    <button onClick={handleLogOut}>Log out</button>
+                  </li>
+                ) : (
+                  <li>
+                    <Link to="/login">Sign In</Link>
+                  </li>
+                )}
               </ul>
             </div>
-
-            {/* <label tabIndex={1} className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
-                <span className="badge badge-sm indicator-item">8</span>
-              </div>
-            </label> */}
-            {/* <div
-              tabIndex={1}
-              className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
-                </div>
-              </div>
-            </div> */}
           </div>
           <div className="dropdown dropdown-end">
             <label tabIndex={2} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="https://placeimg.com/80/80/people" />
+                <img src={user?.photoURL || avatar} alt="" />
               </div>
             </label>
             <ul
