@@ -20,6 +20,10 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
+      {
+        path: "/home",
+        element: <Home></Home>,
+      },
 
       {
         path: "/blogs",
@@ -29,6 +33,7 @@ export const router = createBrowserRouter([
         path: "/categories/:id",
         element: <PrivateRoute><CategoryProduct></CategoryProduct></PrivateRoute>,
         loader: async ({ params }) => {
+          console.log(params.id)
           return fetch(`http://localhost:5000/categories/${params.id}`);
         },
       },

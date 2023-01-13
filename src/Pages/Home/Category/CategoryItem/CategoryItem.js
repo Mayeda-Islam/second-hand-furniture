@@ -13,7 +13,7 @@ const CategoryItem = ({ category }) => {
          
           <div className="card-actions flex flex-col mt-8">
           <h2 className="card-title">{name}</h2>
-            <button className="btn btn-primary"><Link to={`categories/${id}`}>Show more</Link></button>
+            <button className="btn btn-primary"><Link to={`/categories/${id}`}>Show more</Link></button>
             
           </div>
         </div>
