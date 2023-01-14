@@ -6,7 +6,7 @@ import { AuthContext } from "../../../context/Auth/AuthProvider";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   //   const { user } = useContext(AuthContext);
   const handleAddProduct = (data) => {
     const addProduct = {
@@ -28,23 +28,20 @@ const AddProduct = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data.acknowledged){
-            navigate('/buyer/myProduct')
-            toast.success("Add Product successfully")
+        if (data.acknowledged) {
+          navigate("/buyer/myProduct");
+          toast.success("Add Product successfully");
         }
       });
   };
   return (
     <div>
-      <div class="mt-10 container mx-auto">
+      <div class="mt-10 ">
         <div class="mt-10 sm:mt-0">
           <div class="px-4 sm:px-0">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Personal Information
+            <h3 class="text-xl mb-4 font-medium leading-6 text-gray-900">
+              Add Product
             </h3>
-            <p class="mt-1 text-sm text-gray-600">
-              Use a permanent address where you can receive mail.
-            </p>
           </div>
           <div class=" mx-auto w-3/4 md:grid md:grid-cols-2 md:gap-6">
             <div class="mt-5  md:col-span-2 md:mt-0">
