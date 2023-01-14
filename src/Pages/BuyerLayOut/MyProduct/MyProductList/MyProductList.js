@@ -1,34 +1,26 @@
 import React from "react";
 
-const MyProductList = ({ product }) => {
-  const { productName } = product;
-  console.log(productName);
+const MyProductList = ({ product, handleDeleteProduct }) => {
+  const { productName, quantity } = product;
+
   return (
     <div>
-      <tr class="bg-primary border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td class="w-4 p-4">
-          <div class="flex items-center">
-            <label for="checkbox-table-1" class="sr-only">
-              checkbox
-            </label>
-          </div>
-        </td>
+      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
         <th
           scope="row"
           class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
-          Apple MacBook Pro 17"
+          {product.productName}
         </th>
-        <td class="px-6 py-4">{productName}</td>
-        <td class="px-6 py-4">Laptop</td>
-        <td class="px-6 py-4">$2999</td>
+        <td class="px-6 py-4">{product.resalePrice}$</td>
+        <td class="px-6 py-4"></td>
         <td class="px-6 py-4">
-          <a
-            href="#"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Edit
-          </a>
+          <button onClick={() => handleDeleteProduct(product._id)}>
+            delete
+          </button>
+        </td>
+        <td class="px-6 py-4 text-right">
+          <button>Advertise</button>
         </td>
       </tr>
     </div>

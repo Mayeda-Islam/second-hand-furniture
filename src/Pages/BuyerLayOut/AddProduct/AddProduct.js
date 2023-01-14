@@ -9,6 +9,7 @@ const AddProduct = () => {
   const navigate = useNavigate();
   //   const { user } = useContext(AuthContext);
   const handleAddProduct = (data) => {
+    console.log(data);
     const addProduct = {
       category: data.category,
       condition: data.condition,
@@ -18,6 +19,7 @@ const AddProduct = () => {
       productName: data.productName,
       resalePrice: data.resalePrice,
       yearsOfUse: data.yearsOfUse,
+      quantity: data.quantity,
     };
     fetch(`http://localhost:5000/addProduct`, {
       method: "POST",
@@ -144,7 +146,20 @@ const AddProduct = () => {
                           <option>BathRoom</option>
                         </select>
                       </div>
-
+                      <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">
+                          Product Quantity
+                        </label>
+                        <input
+                          type="number"
+                          {...register("quantity", {
+                            required: "quantity require",
+                          })}
+                          defaultValue={1}
+                          autocomplete="address-level2"
+                          class="mt-1 block text-black w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
+                        />
+                      </div>
                       <div class="col-span-6">
                         <label
                           for="street-address"

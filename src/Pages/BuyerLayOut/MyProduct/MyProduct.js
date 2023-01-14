@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { toast } from "react-hot-toast";
 import MyProductList from "./MyProductList/MyProductList";
 
 const MyProduct = () => {
-  const { data: products = [] } = useQuery({
+  const { data: products = [], refetch } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/products`);
@@ -14,6 +15,19 @@ const MyProduct = () => {
   });
   const handleDeleteProduct = (id) => {
     console.log(id);
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          refetch();
+          toast.success("Deleted successfully");
+        }
+      });
+  };
+  const handleAdvertise = (product) => {
+    console.log(product);
   };
   return (
     <div>
@@ -48,15 +62,19 @@ const MyProduct = () => {
                 >
                   {product.productName}
                 </th>
-                <td class="px-6 py-4">{product.resalePrice}</td>
-                <td class="px-6 py-4"></td>
+                <td class="px-6 py-4">{product.resalePrice}$</td>
+                <td class="px-6 py-4">
+                  {product.quantity > 0 ? "Available" : "Sold"}
+                </td>
                 <td class="px-6 py-4">
                   <button onClick={() => handleDeleteProduct(product._id)}>
                     delete
                   </button>
                 </td>
                 <td class="px-6 py-4 text-right">
-                  <button>Advertise</button>
+                  <button onClick={() => handleAdvertise(product)}>
+                    Advertise
+                  </button>
                 </td>
               </tr>
             ))}
