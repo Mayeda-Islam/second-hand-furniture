@@ -1,13 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
+import { AuthContext } from "../../../context/Auth/AuthProvider";
 import MyProductList from "./MyProductList/MyProductList";
 
 const MyProduct = () => {
+  const { user } = useContext(AuthContext);
   const { data: products = [], refetch } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", user._id],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/products`);
+      const res = await fetch(
+        `http://localhost:5000/products?sellerId=${user._id}`
+      );
       const data = await res.json();
 
       return data;
@@ -27,7 +31,7 @@ const MyProduct = () => {
       });
   };
   const handleAdvertise = (product) => {
-    console.log(product);
+    fetch(`http://localhost:5000/categories/02`);
   };
   return (
     <div>

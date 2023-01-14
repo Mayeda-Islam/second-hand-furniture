@@ -6,8 +6,9 @@ import { AuthContext } from "../../../context/Auth/AuthProvider";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
+
   const navigate = useNavigate();
-  //   const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const handleAddProduct = (data) => {
     console.log(data);
     const addProduct = {
@@ -15,13 +16,14 @@ const AddProduct = () => {
       condition: data.condition,
       location: data.location,
       originalPrice: data.originalPrice,
-      phone: data.phone,
+      sellerId: user._id,
       productName: data.productName,
       resalePrice: data.resalePrice,
       yearsOfUse: data.yearsOfUse,
       quantity: data.quantity,
+      isAdvertising: false,
     };
-    fetch(`http://localhost:5000/addProduct`, {
+    fetch(`http://localhost:5000/products`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -114,16 +116,13 @@ const AddProduct = () => {
                       </div>
                       <div class="col-span-6 sm:col-span-3 ">
                         <label class="block text-sm font-medium text-gray-700">
-                          Phone number
+                          Email
                         </label>
                         <input
-                          {...register("phone", {
-                            required: "phone number require",
-                          })}
                           type="text"
-                          n
-                          autocomplete="email"
-                          class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none p-2 focus:ring-indigo-500 sm:text-sm"
+                          defaultValue={user.email}
+                          disabled
+                          class="mt-1 cursor-not-allowed block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none p-2 focus:ring-indigo-500 sm:text-sm"
                         />
                       </div>
 
