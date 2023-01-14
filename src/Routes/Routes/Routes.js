@@ -1,4 +1,6 @@
 import Blogs from "../../Pages/Blogs/Blogs";
+import AddProduct from "../../Pages/BuyerLayOut/AddProduct/AddProduct";
+import BuyerLayOut from "../../Pages/BuyerLayOut/BuyerLayOut/BuyerLayOut";
 import CategoryProduct from "../../Pages/Home/Category/CategoryProduct/CategoryProduct";
 import LogIn from "../../Pages/LogIn/LogIn";
 import NotFound from "../../Pages/NotFound/NotFound";
@@ -20,10 +22,10 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-      {
-        path: "/home",
-        element: <Home></Home>,
-      },
+      // {
+      //   path: "/home",
+      //   element: <Home></Home>,
+      // },
 
       {
         path: "/blogs",
@@ -31,9 +33,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "/categories/:id",
-        element: <PrivateRoute><CategoryProduct></CategoryProduct></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <CategoryProduct></CategoryProduct>
+          </PrivateRoute>
+        ),
         loader: async ({ params }) => {
-          console.log(params.id)
+          console.log(params.id);
           return fetch(`http://localhost:5000/categories/${params.id}`);
         },
       },
@@ -48,11 +54,21 @@ export const router = createBrowserRouter([
       {
         path: "/orders",
         element: <Orders></Orders>,
+        loader: async () => {
+          return fetch(`http://localhost:5000/bookings`);
+        },
       },
       {
         path: "*",
         element: <NotFound></NotFound>,
       },
+    ],
+  },
+  {
+    path: "/buyer",
+    element: <BuyerLayOut></BuyerLayOut>,
+    children: [
+      { path: "/buyer/addProduct", element: <AddProduct></AddProduct> },
     ],
   },
 ]);

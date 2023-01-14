@@ -26,7 +26,7 @@ const CategoryProductDetails = ({ product }) => {
           
           </div>
         </div>
-        <BookNowModal productName={productName} location={location} resalePrice={resalePrice}></BookNowModal>
+        <BookNowModal productName={productName} img={img} location={location} resalePrice={resalePrice}></BookNowModal>
       </div>
     </div>
   );

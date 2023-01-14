@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 
 import { AuthContext } from "../../../../../../context/Auth/AuthProvider";
 
-const BookNowModal = ({ resalePrice, productName, location }) => {
+const BookNowModal = ({ resalePrice, productName, img }) => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
 
@@ -14,7 +14,8 @@ const BookNowModal = ({ resalePrice, productName, location }) => {
      email:data.email,
      productName:data.productName,
      price:data.resalePrice,
-     phone:data.phone
+     phone:data.phone,
+     productImage:img
    }
    fetch(`http://localhost:5000/bookings`,{
     method:"POST",

@@ -72,7 +72,7 @@ const NavBar = () => {
                 </ul>
               </li>
               <li><Link to={'/orders'}>Orders</Link></li>
-              <li><Link to={'/dashBoard'}>DashBoard</Link></li>
+              <li><Link to={'/buyer/addProduct'}>Add Product</Link></li>
               {user?.email ? (
                 <li>
                   <button onClick={handleLogOut}>Log out</button>
@@ -119,7 +119,7 @@ const NavBar = () => {
                   </ul>
                 </li>
                 <li><Link to={'/orders'}>Orders</Link></li>
-              <li><Link to={'/dashBoard'}>DashBoard</Link></li>
+                <li><Link to={'/buyer/addProduct'}>Add Product</Link></li>
                 {user?.email ? (
                   <li>
                     <button onClick={handleLogOut}>Log out</button>
