@@ -28,14 +28,20 @@ const signInWithGoogle=(googleProvider)=>{
 
    useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
-      setUser(currentUser);
+      fetch(`http://localhost:5000/users-by-email/${currentUser.email}`)
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.status){
+            setUser(data.user)
+          }
+        })
+      
       setLoading(false);
     });
     return ()=>unsubscribe();
   }, []);
     const authInfo={
-        signUp,signIn,user,loading,logOut,signInWithGoogle
+        signUp,signIn,user,loading,logOut,signInWithGoogle,setUser
     }
     return (
         <AuthContext.Provider value={authInfo}>

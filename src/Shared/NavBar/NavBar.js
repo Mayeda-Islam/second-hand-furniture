@@ -4,11 +4,12 @@ import logo from "../../assests/logo.png";
 import { AuthContext } from "../../context/Auth/AuthProvider";
 import avatar from "../../assests/avatar.svg";
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, setUser } = useContext(AuthContext);
+  console.log(user);
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        // Sign-out successful.
+        setUser({});
       })
       .catch((error) => {
         // An error happened.
@@ -71,8 +72,17 @@ const NavBar = () => {
                   </li>
                 </ul>
               </li>
-              <li><Link to={'/orders'}>Orders</Link></li>
-              <li><Link to={'/buyer/addProduct'}>Add Product</Link></li>
+              {user?.role === "buyer" && (
+                <li>
+                  <Link to={"/orders"}>Orders</Link>
+                </li>
+              )}
+              {user?.role === "seller" && (
+                <li>
+                  <Link to={"/buyer/addProduct"}>Add Product</Link>
+                </li>
+              )}
+
               {user?.email ? (
                 <li>
                   <button onClick={handleLogOut}>Log out</button>
@@ -118,8 +128,16 @@ const NavBar = () => {
                     </li>
                   </ul>
                 </li>
-                <li><Link to={'/orders'}>Orders</Link></li>
-                <li><Link to={'/buyer/addProduct'}>Add Product</Link></li>
+                {user?.role === "buyer" && (
+                  <li>
+                    <Link to={"/orders"}>Orders</Link>
+                  </li>
+                )}
+                {user?.role === "seller" && (
+                  <li>
+                    <Link to={"/buyer/addProduct"}>Add Product</Link>
+                  </li>
+                )}
                 {user?.email ? (
                   <li>
                     <button onClick={handleLogOut}>Log out</button>
@@ -152,7 +170,7 @@ const NavBar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <Link to="/login">Sign In</Link>
               </li>
             </ul>
           </div>

@@ -8,16 +8,30 @@ import { googleProvider } from "../../firebase/firebase.config";
 
 const LogIn = () => {
   const { register, handleSubmit } = useForm();
-  const{signIn,signInWithGoogle}=useContext(AuthContext)
-  const navigate=useNavigate()
-  const location=useLocation()
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const handleRegister = (data) => {
-    signIn(data.email,data.password)
-    .then((userCredential) => {
-        // Signed in 
+    signIn(data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
         const user = userCredential.user;
-        navigate('/')
+        fetch(`http://localhost:5000/jwt`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status) {
+              localStorage.setItem("accessToken", data.token);
+              navigate("/");
+              toast.success("Sign up successfully");
+            }
+          });
         // ...
       })
       .catch((error) => {
@@ -25,21 +39,84 @@ const LogIn = () => {
         const errorMessage = error.message;
       });
   };
-  const hanldeSignInGoogle=()=>{
+  const hanldeSignInGoogle = () => {
     signInWithGoogle(googleProvider)
-    .then((result) => {
-   
+      .then((result) => {
         const user = result.user;
-        navigate(from,{replace:true})
-        // ...
-      }).catch((error) => {
+        const newUser = {
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          role: "buyer",
+        };
+        fetch(`http://localhost:5000/users-by-email/${user.email}`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status) {
+              fetch(`http://localhost:5000/users`, {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(newUser),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  fetch(`http://localhost:5000/jwt`, {
+                    method: "POST",
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                    body: JSON.stringify(newUser),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.status) {
+                        localStorage.setItem("accessToken", data.token);
+                        navigate(from, { replace: true });
+                        toast.success("successfully login");
+                      }
+                    });
+                });
+            } else {
+              fetch(`http://localhost:5000/users`, {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(newUser),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  fetch(`http://localhost:5000/jwt`, {
+                    method: "POST",
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                    body: JSON.stringify(newUser),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.status) {
+                        localStorage.setItem("accessToken", data.token);
+                        navigate(from, { replace: true });
+                        toast.success("successfully login");
+                      }
+                    });
+                });
+            }
+          });
+
+        //
+      })
+      .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage)
+        console.log(errorMessage);
         // ...
       });
-  }
+  };
   return (
     <div className=" h-[100vh] container mx-auto bg-white flex items-center justify-center">
       <div class="flex  md:w-1/2 lg:w-full justify-center py-10 items-center bg-white">
@@ -113,7 +190,7 @@ const LogIn = () => {
             </span>
           </form>
           <button
-          onClick={hanldeSignInGoogle}
+            onClick={hanldeSignInGoogle}
             class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
           >
             Google Sign In

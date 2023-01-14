@@ -1,6 +1,7 @@
 import Blogs from "../../Pages/Blogs/Blogs";
 import AddProduct from "../../Pages/BuyerLayOut/AddProduct/AddProduct";
 import BuyerLayOut from "../../Pages/BuyerLayOut/BuyerLayOut/BuyerLayOut";
+import MyProduct from "../../Pages/BuyerLayOut/MyProduct/MyProduct";
 import CategoryProduct from "../../Pages/Home/Category/CategoryProduct/CategoryProduct";
 import LogIn from "../../Pages/LogIn/LogIn";
 import NotFound from "../../Pages/NotFound/NotFound";
@@ -69,6 +70,7 @@ export const router = createBrowserRouter([
     element: <BuyerLayOut></BuyerLayOut>,
     children: [
       { path: "/buyer/addProduct", element: <AddProduct></AddProduct> },
+      { path: "/buyer/myProduct", element: <MyProduct></MyProduct> },
     ],
   },
 ]);
