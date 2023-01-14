@@ -1,7 +1,7 @@
 import React from "react";
 import BookNowModal from "./BookNowModal/BookNowModal";
 
-const CategoryProductDetails = ({ product }) => {
+const ProductCard = ({ product }) => {
   const { productName, location, originalPrice, resalePrice, yearsOfUse, img } =
     product;
   return (
@@ -22,14 +22,20 @@ const CategoryProductDetails = ({ product }) => {
             <p>Resale Price:{resalePrice} $</p>
           </div>
           <div className="card-actions justify-end">
-            <label htmlFor="my-modal-5" className="badge badge-outline">Buy Now</label>
-          
+            <label htmlFor="my-modal-5" className="badge badge-outline">
+              Buy Now
+            </label>
           </div>
         </div>
-        <BookNowModal productName={productName} img={img} location={location} resalePrice={resalePrice}></BookNowModal>
+        <BookNowModal
+          productName={productName}
+          img={img}
+          location={location}
+          resalePrice={resalePrice}
+        ></BookNowModal>
       </div>
     </div>
   );
 };
 
-export default CategoryProductDetails;
+export default ProductCard;

@@ -1,18 +1,16 @@
 import React from "react";
-import img1 from '../../../assests/advertise/img-1.jpg'
-import img2 from '../../../assests/advertise/img-2.jpg'
-import img3 from '../../../assests/advertise/img-3.jpg'
-import img4 from '../../../assests/advertise/img-4.jpg'
-import img5 from '../../../assests/advertise/img-5.jpg'
-import img6 from '../../../assests/advertise/img-6.jpg'
-import img7 from '../../../assests/advertise/img-7.jpg'
-import img8 from '../../../assests/advertise/img-8.jpg'
+import img1 from "../../../assests/advertise/img-1.jpg";
+import img2 from "../../../assests/advertise/img-2.jpg";
+import img3 from "../../../assests/advertise/img-3.jpg";
+import img4 from "../../../assests/advertise/img-4.jpg";
+import img5 from "../../../assests/advertise/img-5.jpg";
+import img6 from "../../../assests/advertise/img-6.jpg";
+import img7 from "../../../assests/advertise/img-7.jpg";
+import img8 from "../../../assests/advertise/img-8.jpg";
 
-const Advertise = () => {
-
+const Gallery = () => {
   return (
     <div className="">
-      
       <h1 className="text-center font-bold py-10 mt-5 text-3xl dark:text-white">
         Our Product Gallery
       </h1>
@@ -77,9 +75,8 @@ const Advertise = () => {
           </div>
         </div>
       </div>
-     
     </div>
   );
 };
 
-export default Advertise;
+export default Gallery;

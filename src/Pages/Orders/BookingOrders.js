@@ -1,7 +1,7 @@
 import React from "react";
 
 const BookingOrders = ({ booking }) => {
-  const { buyerName, email, productName, price, phone,productImage } = booking;
+  const { buyerName, email, productName, price, phone, productImage } = booking;
   return (
     <tr>
       <th>
@@ -11,10 +11,7 @@ const BookingOrders = ({ booking }) => {
         <div className="flex items-center space-x-3">
           <div className="avatar">
             <div className="mask mask-squircle w-12 h-12">
-              <img
-                src={productImage}
-                alt="Avatar Tailwind CSS Component"
-              />
+              <img src={productImage} alt="Avatar Tailwind CSS Component" />
             </div>
           </div>
           <div>

@@ -79,7 +79,7 @@ const NavBar = () => {
               )}
               {user?.role === "seller" && (
                 <li>
-                  <Link to={"/buyer/addProduct"}>Add Product</Link>
+                  <Link to={"/buyer/addProduct"}>DashBoard</Link>
                 </li>
               )}
 
@@ -135,7 +135,7 @@ const NavBar = () => {
                 )}
                 {user?.role === "seller" && (
                   <li>
-                    <Link to={"/buyer/addProduct"}>Add Product</Link>
+                    <Link to={"/buyer/addProduct"}>DashBoard</Link>
                   </li>
                 )}
                 {user?.email ? (

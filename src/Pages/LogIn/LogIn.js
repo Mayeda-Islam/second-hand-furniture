@@ -17,7 +17,7 @@ const LogIn = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        fetch(`http://localhost:5000/jwt`, {
+        fetch(`https://assignment-12-server-nine-virid.vercel.app/jwt`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -49,26 +49,34 @@ const LogIn = () => {
           photoURL: user.photoURL,
           role: "buyer",
         };
-        fetch(`http://localhost:5000/users-by-email/${user.email}`)
+        fetch(
+          `https://assignment-12-server-nine-virid.vercel.app/users-by-email/${user.email}`
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.status) {
-              fetch(`http://localhost:5000/users`, {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(newUser),
-              })
+              fetch(
+                `https://assignment-12-server-nine-virid.vercel.app/users`,
+                {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(newUser),
+                }
+              )
                 .then((res) => res.json())
                 .then((data) => {
-                  fetch(`http://localhost:5000/jwt`, {
-                    method: "POST",
-                    headers: {
-                      "content-type": "application/json",
-                    },
-                    body: JSON.stringify(newUser),
-                  })
+                  fetch(
+                    `https://assignment-12-server-nine-virid.vercel.app/jwt`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify(newUser),
+                    }
+                  )
                     .then((res) => res.json())
                     .then((data) => {
                       if (data.status) {
@@ -79,22 +87,28 @@ const LogIn = () => {
                     });
                 });
             } else {
-              fetch(`http://localhost:5000/users`, {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(newUser),
-              })
+              fetch(
+                `https://assignment-12-server-nine-virid.vercel.app/users`,
+                {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(newUser),
+                }
+              )
                 .then((res) => res.json())
                 .then((data) => {
-                  fetch(`http://localhost:5000/jwt`, {
-                    method: "POST",
-                    headers: {
-                      "content-type": "application/json",
-                    },
-                    body: JSON.stringify(newUser),
-                  })
+                  fetch(
+                    `https://assignment-12-server-nine-virid.vercel.app/jwt`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify(newUser),
+                    }
+                  )
                     .then((res) => res.json())
                     .then((data) => {
                       if (data.status) {

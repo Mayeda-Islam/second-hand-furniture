@@ -41,7 +41,9 @@ export const router = createBrowserRouter([
         ),
         loader: async ({ params }) => {
           console.log(params.id);
-          return fetch(`http://localhost:5000/categories/${params.id}`);
+          return fetch(
+            `https://assignment-12-server-nine-virid.vercel.app/categories/${params.id}`
+          );
         },
       },
       {
@@ -56,7 +58,9 @@ export const router = createBrowserRouter([
         path: "/orders",
         element: <Orders></Orders>,
         loader: async () => {
-          return fetch(`http://localhost:5000/bookings`);
+          return fetch(
+            `https://assignment-12-server-nine-virid.vercel.app/bookings`
+          );
         },
       },
       {

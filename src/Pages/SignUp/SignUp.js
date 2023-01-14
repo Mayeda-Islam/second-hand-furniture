@@ -25,7 +25,7 @@ const SignUp = () => {
           role,
           email: data.email,
         };
-        fetch(`http://localhost:5000/users`, {
+        fetch(`https://assignment-12-server-nine-virid.vercel.app/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -35,7 +35,7 @@ const SignUp = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            fetch(`http://localhost:5000/jwt`, {
+            fetch(`https://assignment-12-server-nine-virid.vercel.app/jwt`, {
               method: "POST",
               headers: {
                 "content-type": "application/json",

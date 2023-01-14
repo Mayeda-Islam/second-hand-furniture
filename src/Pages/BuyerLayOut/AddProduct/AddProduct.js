@@ -23,7 +23,7 @@ const AddProduct = () => {
       quantity: data.quantity,
       isAdvertising: false,
     };
-    fetch(`http://localhost:5000/products`, {
+    fetch(`https://assignment-12-server-nine-virid.vercel.app/products`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

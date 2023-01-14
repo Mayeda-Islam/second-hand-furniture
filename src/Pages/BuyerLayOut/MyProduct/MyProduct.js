@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../../context/Auth/AuthProvider";
-import MyProductList from "./MyProductList/MyProductList";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
@@ -10,16 +10,15 @@ const MyProduct = () => {
     queryKey: ["products", user._id],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products?sellerId=${user._id}`
+        `https://assignment-12-server-nine-virid.vercel.app/products?sellerId=${user._id}`
       );
       const data = await res.json();
-
       return data;
     },
   });
   const handleDeleteProduct = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://assignment-12-server-nine-virid.vercel.app/products/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -30,9 +29,21 @@ const MyProduct = () => {
         }
       });
   };
+
   const handleAdvertise = (product) => {
-    fetch(`http://localhost:5000/categories/02`);
+    axios
+      .patch(
+        `https://assignment-12-server-nine-virid.vercel.app/products/${product._id}`,
+        {
+          isAdvertising: true,
+        }
+      )
+      .then((res) => {
+        toast.success("Successfully added to advertising");
+        refetch();
+      });
   };
+
   return (
     <div>
       <div class="relative  overflow-x-auto shadow-md sm:rounded-lg">
@@ -52,9 +63,6 @@ const MyProduct = () => {
               <th scope="col" class="px-6 py-3">
                 Action
               </th>
-              <th scope="col" class="px-6 py-3">
-                Display
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -71,14 +79,18 @@ const MyProduct = () => {
                   {product.quantity > 0 ? "Available" : "Sold"}
                 </td>
                 <td class="px-6 py-4">
-                  <button onClick={() => handleDeleteProduct(product._id)}>
-                    delete
-                  </button>
-                </td>
-                <td class="px-6 py-4 text-right">
-                  <button onClick={() => handleAdvertise(product)}>
-                    Advertise
-                  </button>
+                  <div>
+                    <button onClick={() => handleDeleteProduct(product._id)}>
+                      delete
+                    </button>
+                    <button
+                      className="btn"
+                      disabled={product.isAdvertising}
+                      onClick={() => handleAdvertise(product)}
+                    >
+                      Advertise
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

@@ -1,13 +1,12 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
-import BookNowModal from '../Home/Category/CategoryProduct/CategoryProductDetails/BookNowModal/BookNowModal';
-import BookingOrders from './BookingOrders';
+import React from "react";
+import { useLoaderData } from "react-router-dom";
+import BookingOrders from "./BookingOrders";
 
 const Orders = () => {
-    const bookings=useLoaderData()
-    return (
-        <div className='container mx-auto'>
-             <div className=" overflow-x-auto w-full">
+  const bookings = useLoaderData();
+  return (
+    <div className="container mx-auto">
+      <div className=" overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
             <tr>
@@ -23,18 +22,17 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-          {
-                bookings.map(booking=><BookingOrders booking={booking} key={booking._id}></BookingOrders>)
-            }
-            </tbody>
+            {bookings.map((booking) => (
+              <BookingOrders
+                booking={booking}
+                key={booking._id}
+              ></BookingOrders>
+            ))}
+          </tbody>
         </table>
       </div>
-
-
-
-            
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Orders;

@@ -1,35 +1,34 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-
-import { AuthContext } from "../../../../../../context/Auth/AuthProvider";
+import { AuthContext } from "../../../context/Auth/AuthProvider";
 
 const BookNowModal = ({ resalePrice, productName, img }) => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
 
   const handleRegister = (data) => {
-   const bookingInfo={
-     buyerName:data.name,
-     email:data.email,
-     productName:data.productName,
-     price:data.resalePrice,
-     phone:data.phone,
-     productImage:img
-   }
-   fetch(`http://localhost:5000/bookings`,{
-    method:"POST",
-    headers:{
-      "content-type":"application/json"
-    },
-    body:JSON.stringify(bookingInfo)
-   })
-   .then(res=>res.json())
-   .then(data=>{
-    if(data.acknowledged){
-      toast.success("Successfully booked")
-    }
-   })
+    const bookingInfo = {
+      buyerName: data.name,
+      email: data.email,
+      productName: data.productName,
+      price: data.resalePrice,
+      phone: data.phone,
+      productImage: img,
+    };
+    fetch(`https://assignment-12-server-nine-virid.vercel.app/bookings`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Successfully booked");
+        }
+      });
   };
 
   return (

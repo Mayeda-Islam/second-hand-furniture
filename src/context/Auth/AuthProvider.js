@@ -35,7 +35,9 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      fetch(`http://localhost:5000/users-by-email/${currentUser.email}`)
+      fetch(
+        `https://assignment-12-server-nine-virid.vercel.app/users-by-email/${currentUser.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.status) {
