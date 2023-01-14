@@ -1,36 +1,50 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+
 import { AuthContext } from "../../../../../../context/Auth/AuthProvider";
 
 const BookNowModal = ({ resalePrice, productName, location }) => {
   const { user } = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const handleModalSubmit = (data) => {
-    alert("working");
-    console.log(data);
+  const { register, handleSubmit } = useForm();
+
+  const handleRegister = (data) => {
+   const bookingInfo={
+     buyerName:data.name,
+     email:data.email,
+     productName:data.productName,
+     price:data.resalePrice,
+     phone:data.phone
+   }
+   fetch(`http://localhost:5000/bookings`,{
+    method:"POST",
+    headers:{
+      "content-type":"application/json"
+    },
+    body:JSON.stringify(bookingInfo)
+   })
+   .then(res=>res.json())
+   .then(data=>{
+    if(data.acknowledged){
+      toast.success("Successfully booked")
+    }
+   })
   };
+
   return (
     <div>
-      {/* The button to open modal */}
-
-      {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal-5" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box w-11/12  max-w-lg">
-          <div className="relative my-10">
-            <h3 className="font-bold text-5xl">Your Info !</h3>
-
+        <div className="modal-box w-11/12 max-w-lg">
+          <div className="relative my-4">
+            <h1 className="text-2xl ">Booking Now</h1>
             <label
               htmlFor="my-modal-5"
-              className="btn btn-circle btn-outline absolute top-0 right-0"
+              className=" border-2 border-primary rounded-full p-2 absolute -top-6 right-0"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-4 w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -43,122 +57,105 @@ const BookNowModal = ({ resalePrice, productName, location }) => {
                 />
               </svg>
             </label>
+            {/* <label htmlFor="my-modal-5" className="btn absolute top-0 right-0">
+              Yay!
+            </label> */}
           </div>
-          <form
-            onSubmit={handleSubmit(handleModalSubmit)}
-            class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          >
-            <div class="mb-4">
-              <label
-                class="block text-start text-gray-700 text-sm font-bold mb-2"
-                for="username"
+          <form onSubmit={handleSubmit(handleRegister)} class="bg-white">
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
               >
-                User Name
-              </label>
+                <path
+                  fill-rule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clip-rule="evenodd"
+                />
+              </svg>
               <input
-                {...register("name", { required: true })}
+                {...register("name")}
+                class="pl-2 outline-none border-none"
+                type="text"
+                id=""
+                placeholder="Full name"
+                defaultValue={user?.displayName}
                 readOnly
-                disabled
-                defaultValue={user.displayName}
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
-                placeholder="User name"
               />
             </div>
-            <div class="mb-4">
-              <label
-                class="block text-start text-gray-700 text-sm font-bold mb-2"
-                for="username"
+
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Email
-              </label>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                />
+              </svg>
               <input
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: "Email Address is required",
+                })}
+                class="pl-2 outline-none border-none"
+                type="text"
+                placeholder="Email Address"
+                defaultValue={user?.email}
                 readOnly
-                disabled
-                defaultValue={user.email}
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
-                placeholder="Email"
               />
             </div>
-            <div class="mb-6">
-              <label
-                class="block text-start text-gray-700 text-sm font-bold mb-2"
-                for="password"
-              >
-                Product Name
-              </label>
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
               <input
-                {...register("productName", { required: true })}
-                readOnly
-                disabled
+                {...register("productName", {})}
                 defaultValue={productName}
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                class="pl-2 outline-none border-none"
                 type="text"
-                placeholder=""
               />
-              <p class="text-red-500 text-xs italic">
-                {errors.exampleRequired && <span>This field is required</span>}
-              </p>
             </div>
-            <div class="mb-6">
-              <label
-                class="block text-start text-gray-700 text-sm font-bold mb-2"
-                for="password"
-              >
-                Product Price
-              </label>
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
               <input
-                {...register("itemPrice", { required: true })}
-                readOnly
-                disabled
+                {...register("resalePrice", {})}
+                class="pl-2 outline-none border-none"
                 defaultValue={resalePrice}
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                readOnly
                 type="text"
-                placeholder=""
               />
-              <p class="text-red-500 text-xs italic">
-                {errors.exampleRequired && <span>This field is required</span>}
-              </p>
             </div>
-            <div class="mb-6">
-              <label class="block text-start text-gray-700 text-sm font-bold mb-2">
-                Phone Number
-              </label>
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
               <input
-                {...register("phoneNumber", { required: true })}
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                {...register("phone", {
+                  required: "phone number required",
+                })}
+                class="pl-2 outline-none border-none"
                 type="text"
-                placeholder=""
               />
-              <p class="text-red-500 text-xs italic">
-                {errors.exampleRequired && <span>This field is required</span>}
-              </p>
             </div>
-            <div class="mb-6">
-              <label class="block text-start text-gray-700 text-sm font-bold mb-2">
-                Meeting Location
-              </label>
+            <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
               <input
-                {...register("meetingLocation", { required: true })}
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                {...register("location", {
+                  required: "meeting location required",
+                })}
+                class="pl-2 outline-none border-none"
                 type="text"
-                placeholder=""
               />
-              <p class="text-red-500 text-xs italic">
-                {errors.exampleRequired && <span>This field is required</span>}
-              </p>
             </div>
-            <div class="flex items-center justify-between">
-              <button
-                type="submit"
-                className="bg-primary  hover:bg-secondary text-white font-bold py-2 px-4 rounded border-none"
-              >submit
-                </button>
-              
-            </div>
+
+            <button
+              type="submit"
+              class="block w-full bg-primary mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+            >
+              Submit
+            </button>
           </form>
+          <div className="modal-action"></div>
         </div>
       </div>
     </div>
