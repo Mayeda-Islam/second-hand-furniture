@@ -6,11 +6,11 @@ const Category = () => {
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = fetch(
+      const res = await fetch(
         `https://assignment-12-server-nine-virid.vercel.app/categories`
       );
       const data = await res.json();
-      console.log(data);
+      console.log("inside", data);
       return data;
     },
   });
