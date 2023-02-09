@@ -1,12 +1,14 @@
+import AllUser from "../../AdminDashboard/AllUser/AllUser";
 import Blogs from "../../Pages/Blogs/Blogs";
-import AddProduct from "../../Pages/BuyerLayOut/AddProduct/AddProduct";
-import BuyerLayOut from "../../Pages/BuyerLayOut/BuyerLayOut/BuyerLayOut";
-import MyProduct from "../../Pages/BuyerLayOut/MyProduct/MyProduct";
+import AddProduct from "../../Pages/SellerLayOut/AddProduct/AddProduct";
+import SellerLayOut from "../../Pages/SellerLayOut/SellerLayOut/SellerLayOut";
+import MyProduct from "../../Pages/SellerLayOut/MyProduct/MyProduct";
 import CategoryProduct from "../../Pages/Home/Category/CategoryProduct/CategoryProduct";
 import LogIn from "../../Pages/LogIn/LogIn";
 import NotFound from "../../Pages/NotFound/NotFound";
 import Orders from "../../Pages/Orders/Orders";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -33,7 +35,7 @@ export const router = createBrowserRouter([
         element: <Blogs></Blogs>,
       },
       {
-        path: "/categories/:id",
+        path: "/products/:id",
         element: (
           <PrivateRoute>
             <CategoryProduct></CategoryProduct>
@@ -41,9 +43,7 @@ export const router = createBrowserRouter([
         ),
         loader: async ({ params }) => {
           console.log(params.id);
-          return fetch(
-            `https://assignment-12-server-nine-virid.vercel.app/categories/${params.id}`
-          );
+          return fetch(`http://localhost:5000/products/category/${params.id}`);
         },
       },
       {
@@ -53,6 +53,15 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/alluser",
+        element: (
+          <AdminRoute>
+            {" "}
+            <AllUser></AllUser>
+          </AdminRoute>
+        ),
       },
       {
         path: "/orders",
@@ -71,7 +80,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/buyer",
-    element: <BuyerLayOut></BuyerLayOut>,
+    element: <SellerLayOut></SellerLayOut>,
     children: [
       { path: "/buyer/addProduct", element: <AddProduct></AddProduct> },
       { path: "/buyer/myProduct", element: <MyProduct></MyProduct> },

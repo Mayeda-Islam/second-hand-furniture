@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import NavBar from "../../../Shared/NavBar/NavBar";
 
-const BuyerLayOut = () => {
+const SellerLayOut = () => {
   return (
     <div className="container mx-auto">
       <NavBar></NavBar>
@@ -48,4 +48,4 @@ const BuyerLayOut = () => {
   );
 };
 
-export default BuyerLayOut;
+export default SellerLayOut;

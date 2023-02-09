@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/Auth/AuthProvider";
 import avatar from "../../assests/avatar.svg";
 const NavBar = () => {
   const { user, logOut, setUser } = useContext(AuthContext);
-  console.log(user);
+  console.log(user?.role);
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -43,10 +43,14 @@ const NavBar = () => {
               <li tabIndex={1}>
                 <Link to="blogs">Blogs</Link>
                 <ul className="p-2">
-                  <li></li>
                   <li>
                     <Link to="/home">home</Link>
                   </li>
+                  {user?.role === "admin" && (
+                    <li>
+                      <Link to={"/alluser"}>Alluser</Link>
+                    </li>
+                  )}
                 </ul>
               </li>
 
@@ -106,28 +110,11 @@ const NavBar = () => {
                 <li tabIndex={0}>
                   <Link to="blogs">Blogs</Link>
                 </li>
-                <li tabIndex={0}>
-                  <a>
-                    Option
-                    <svg
-                      className="fill-current"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                    </svg>
-                  </a>
-                  <ul className="p-2">
-                    <li>
-                      <a>Seller</a>
-                    </li>
-                    <li>
-                      <a>Buyer</a>
-                    </li>
-                  </ul>
-                </li>
+                {user?.role === "admin" && (
+                  <li>
+                    <Link to={"/alluser"}>Alluser</Link>
+                  </li>
+                )}
                 {user?.role === "buyer" && (
                   <li>
                     <Link to={"/orders"}>Orders</Link>

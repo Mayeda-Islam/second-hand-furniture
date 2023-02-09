@@ -10,7 +10,6 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const handleAddProduct = (data) => {
-    console.log(data);
     const addProduct = {
       category: data.category,
       condition: data.condition,
