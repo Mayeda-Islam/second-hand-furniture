@@ -1,45 +1,62 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../../context/Auth/AuthProvider";
+import PaymentModal from "./PaymentModal";
 
-const BookNowModal = ({ resalePrice, productName, img }) => {
+const OrderInfoModal = ({ product, setSelectedProduct }) => {
+  const orderModalRef = useRef();
+  const payModalRef = useRef();
+  const [orderInfo, setOrderInfo] = useState({});
+  const { resalePrice, productName, img } = product;
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
-
+  const [paymentType, setPaymentType] = useState("");
   const handleRegister = (data) => {
-    const bookingInfo = {
+    const orderInfo = {
       buyerName: data.name,
       email: data.email,
       productName: data.productName,
       price: data.resalePrice,
       phone: data.phone,
       productImage: img,
+      paymentType,
+      paymentStatus: "unpaid",
     };
-    fetch(`https://assignment-12-server-nine-virid.vercel.app/bookings`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bookingInfo),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          toast.success("Successfully booked");
-        }
-      });
+    if (paymentType === "pay_later" || paymentType === "cash_on_delivery") {
+      fetch(`http://localhost:5000/orders`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(orderInfo),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Successfully booked");
+            orderModalRef.current.click();
+          }
+        });
+    } else {
+      setOrderInfo(orderInfo);
+      payModalRef.current.click();
+    }
   };
-
+  const handleStorePayType = (e) => {
+    setPaymentType(e.target.value);
+  };
   return (
-    <div>
+    <>
       <input type="checkbox" id="my-modal-5" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box w-11/12 max-w-lg">
           <div className="relative my-4">
-            <h1 className="text-2xl ">Booking Now</h1>
+            <h1 className="text-2xl ">Buy Now</h1>
             <label
+              ref={orderModalRef}
               htmlFor="my-modal-5"
+              onClick={() => setSelectedProduct(null)}
               className=" border-2 border-primary rounded-full p-2 absolute -top-6 right-0"
             >
               <svg
@@ -147,19 +164,43 @@ const BookNowModal = ({ resalePrice, productName, img }) => {
                 type="text"
               />
             </div>
-
-            <button
-              type="submit"
-              class="block w-full bg-primary mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+            <select
+              onChange={handleStorePayType}
+              className="select select-accent- outline-none border-none  w-full py-2 px-3 rounded-2xl border-2 my-4"
             >
-              Submit
-            </button>
+              <option disabled selected>
+                Pick your payment method
+              </option>
+              <option value={"pay_now"}>Pay Now</option>
+              <option value={"pay_later"}>Pay Later</option>
+              <option value={"cash_on_delivery"}>Cash Nn Delivery</option>
+            </select>
+            {paymentType === "pay_later" ||
+            paymentType === "cash_on_delivery" ? (
+              <button
+                type="submit"
+                class="block w-full bg-primary mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+              >
+                Place Order
+              </button>
+            ) : (
+              <button
+                type="submit"
+                class="block w-full bg-primary mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+              >
+                {" "}
+                Proceed to Pay
+              </button>
+            )}
           </form>
-          <div className="modal-action"></div>
         </div>
       </div>
-    </div>
+      <PaymentModal
+        ref={{ orderModalRef, payModalRef }}
+        orderInfo={orderInfo}
+      ></PaymentModal>
+    </>
   );
 };
 
-export default BookNowModal;
+export default OrderInfoModal;

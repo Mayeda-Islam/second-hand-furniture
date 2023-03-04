@@ -21,7 +21,7 @@ const Category = () => {
       </h1>
       <div className="grid grid-cols-1 mx-auto lg:grid-cols-2 gap-12">
         {categories.map((category) => (
-          <CategoryItem category={category} key={category.id}></CategoryItem>
+          <CategoryItem category={category} key={category._id}></CategoryItem>
         ))}
       </div>
     </div>

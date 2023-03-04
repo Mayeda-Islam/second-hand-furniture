@@ -10,7 +10,10 @@ import Orders from "../../Pages/Orders/Orders";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-
+import FavByUsers from "../../FavByUsers/FavByUsers/FavByUsers";
+// import { useContext } from "react";
+// import { AuthContext } from "../../context/Auth/AuthProvider";
+// const {user}=useContext(AuthContext)
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main/Main");
 const { default: Home } = require("../../Pages/Home/Home");
@@ -25,25 +28,27 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-      // {
-      //   path: "/home",
-      //   element: <Home></Home>,
-      // },
 
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
       },
       {
-        path: "/products/:id",
+        path: "/favorite",
+        element: <FavByUsers></FavByUsers>,
+      },
+      {
+        path: "/products/category/:categoryId",
         element: (
           <PrivateRoute>
             <CategoryProduct></CategoryProduct>
           </PrivateRoute>
         ),
         loader: async ({ params }) => {
-          console.log(params.id);
-          return fetch(`http://localhost:5000/products/category/${params.id}`);
+          console.log("inside of params", params);
+          return fetch(
+            `http://localhost:5000/products/category/${params.categoryId}`
+          );
         },
       },
       {
@@ -67,9 +72,7 @@ export const router = createBrowserRouter([
         path: "/orders",
         element: <Orders></Orders>,
         loader: async () => {
-          return fetch(
-            `https://assignment-12-server-nine-virid.vercel.app/bookings`
-          );
+          return fetch(`http://localhost:5000/orders`);
         },
       },
       {

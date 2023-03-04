@@ -1,0 +1,79 @@
+[
+  {
+    "_id": "63c112fe4f3b8cff2d079509",
+    "category_id": "01",
+    "productName": "BedRoom Bed",
+    "location": "Gulshan",
+    "originalPrice": "15",
+    "resalePrice": "10",
+    "yearsOfUse": "1 years",
+    "img": "https://i.ibb.co/sJbbXns/category-dining.png",
+    "favByUsers": []
+  },
+  {
+    "_id": "63c112fe4f3b8cff2d07950a",
+    "category_id": "02",
+    "productName": "Dining Table",
+    "location": "Sonargoan",
+    "originalPrice": "20",
+    "resalePrice": "10",
+    "yearsOfUse": "2 years",
+    "img": "https://i.ibb.co/sJbbXns/category-dining.png",
+    "favByUsers": []
+  },
+  {
+    "_id": "63c112fe4f3b8cff2d07950b",
+    "category_id": "02",
+    "productName": "Dining Table",
+    "location": "Nobabgoanj",
+    "originalPrice": "10",
+    "resalePrice": "8",
+    "yearsOfUse": "1.5 years",
+    "img": "https://i.ibb.co/fDcx1h8/kitchen.png",
+    "favByUsers": []
+  },
+  {
+    "_id": "63c112fe4f3b8cff2d07950c",
+    "category_id": "03",
+    "productName": "Dining Accessories",
+    "location": "Shideshori",
+    "originalPrice": "30",
+    "resalePrice": "20",
+    "yearsOfUse": "6 months",
+    "img": "https://i.ibb.co/fDcx1h8/kitchen.png",
+    "favByUsers": []
+  },
+  {
+    "_id": "63c112fe4f3b8cff2d07950d",
+    "category_id": "03",
+    "productName": "Dining Accessories",
+    "location": "Bogura",
+    "originalPrice": "30",
+    "resalePrice": "20",
+    "yearsOfUse": "1 years",
+    "img": "https://i.ibb.co/VxJDFmz/bathroom.png",
+    "favByUsers": []
+  },
+  {
+    "_id": "63c112fe4f3b8cff2d07950e",
+    "category_id": "04",
+    "productName": "Bath Tub",
+    "location": "Dhandmondi",
+    "originalPrice": "14",
+    "resalePrice": "10",
+    "yearsOfUse": "1.2 years",
+    "img": "https://i.ibb.co/VxJDFmz/bathroom.png",
+    "favByUsers": []
+  },
+  {
+    "_id": "63c112fe4f3b8cff2d07950f",
+    "category_id": "04",
+    "productName": "Bath Tub",
+    "location": "Mirpur",
+    "originalPrice": "14",
+    "resalePrice": "10",
+    "yearsOfUse": "2 years",
+    "img": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80",
+    "favByUsers": []
+  }
+]

@@ -1,7 +1,16 @@
 import React from "react";
 
-const BookingOrders = ({ booking }) => {
-  const { buyerName, email, productName, price, phone, productImage } = booking;
+const BookingOrders = ({ orderInfo, handlePaymentButton }) => {
+  const {
+    buyerName,
+    email,
+    productName,
+    price,
+    phone,
+    productImage,
+    paymentStatus,
+  } = orderInfo;
+
   return (
     <tr>
       <th>
@@ -29,7 +38,16 @@ const BookingOrders = ({ booking }) => {
       </td>
       <td>{price} $</td>
       <th>
-        <button className="btn btn-ghost btn-xs">pay</button>
+        {paymentStatus === "unpaid" ? (
+          <button
+            onClick={() => handlePaymentButton(orderInfo)}
+            className="btn  btn-warning "
+          >
+            pay
+          </button>
+        ) : (
+          <span className="text-lime-500 ">Paid</span>
+        )}
       </th>
     </tr>
   );

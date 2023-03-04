@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/Auth/AuthProvider";
 import avatar from "../../assests/avatar.svg";
 const NavBar = () => {
   const { user, logOut, setUser } = useContext(AuthContext);
-  console.log(user?.role);
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -77,9 +77,14 @@ const NavBar = () => {
                 </ul>
               </li>
               {user?.role === "buyer" && (
-                <li>
-                  <Link to={"/orders"}>Orders</Link>
-                </li>
+                <>
+                  <li>
+                    <Link to={"/orders"}>Orders</Link>
+                  </li>
+                  <li>
+                    <Link to={"/favorite"}>My Favorite</Link>
+                  </li>
+                </>
               )}
               {user?.role === "seller" && (
                 <li>
@@ -116,9 +121,14 @@ const NavBar = () => {
                   </li>
                 )}
                 {user?.role === "buyer" && (
-                  <li>
-                    <Link to={"/orders"}>Orders</Link>
-                  </li>
+                  <>
+                    <li>
+                      <Link to={"/orders"}>Orders</Link>
+                    </li>
+                    <li>
+                      <Link to={"/favorite"}>My Favorite</Link>
+                    </li>
+                  </>
                 )}
                 {user?.role === "seller" && (
                   <li>
