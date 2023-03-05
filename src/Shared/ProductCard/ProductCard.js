@@ -7,11 +7,11 @@ import { toast } from "react-hot-toast";
 
 const ProductCard = ({
   refetchFavByUser,
-  refetch,
   product,
   setSelectedProduct,
   favProductsByUser,
 }) => {
+  console.log(favProductsByUser);
   const { user } = useContext(AuthContext);
   const userEmail = user.email;
   const {
@@ -39,7 +39,7 @@ const ProductCard = ({
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Favorite added");
-          refetch();
+          refetchFavByUser();
         }
       });
   };
@@ -51,6 +51,7 @@ const ProductCard = ({
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Unfavorite successfully");
+
           refetchFavByUser();
         }
       });
@@ -79,7 +80,7 @@ const ProductCard = ({
               {productName}
               <div className="badge badge-secondary">verified</div>
             </h2>
-            {favProductsByUser.find(
+            {favProductsByUser?.find(
               (favProduct) => favProduct.productId === _id
             ) ? (
               <FcLike onClick={() => handleFavByUserDelete(_id)}></FcLike>

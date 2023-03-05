@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -6,34 +8,51 @@ import { AuthContext } from "../../../context/Auth/AuthProvider";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
-
+  console.log("imgbb", process.env.REACT_APP_imgbb_key);
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const res = await axios.get(`http://localhost:5000/categories`);
+      const data = await res.data;
+      return data;
+    },
+  });
+  console.log(categories);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const handleAddProduct = (data) => {
-    const addProduct = {
-      category: data.category,
-      condition: data.condition,
-      location: data.location,
-      originalPrice: data.originalPrice,
-      sellerId: user._id,
-      productName: data.productName,
-      resalePrice: data.resalePrice,
-      yearsOfUse: data.yearsOfUse,
-      quantity: data.quantity,
-      isAdvertising: false,
-    };
-    fetch(`https://assignment-12-server-nine-virid.vercel.app/products`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(addProduct),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          navigate("/buyer/myProduct");
-          toast.success("Add Product successfully");
+    const formData = new FormData();
+    const image = data.image[0];
+    formData.append("image", image);
+    axios
+      .post(
+        `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgbb_key}`,
+        formData
+      )
+      .then((res) => {
+        if (res) {
+          console.log(res.data.data.url);
+          const addProduct = {
+            ...data,
+            sellerId: user._id,
+            isAdvertising: false,
+            img: res.data.data.url,
+          };
+          console.log(addProduct);
+          fetch(`https://assignment-12-server-nine-virid.vercel.app/products`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(addProduct),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                navigate("/seller/myProduct");
+                toast.success("Add Product successfully");
+              }
+            });
         }
       });
   };
@@ -72,8 +91,24 @@ const AddProduct = () => {
                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 sm:text-sm"
                         />
                       </div>
+                      <div class="col-span-6 sm:col-span-3">
+                        <label
+                          for="Product-name"
+                          class="block text-sm font-medium text-gray-700"
+                        >
+                          Image
+                        </label>
+                        <input
+                          {...register("image", {
+                            required: "Image is required",
+                          })}
+                          type="file"
+                          autocomplete="given-name"
+                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 sm:text-sm"
+                        />
+                      </div>
 
-                      <div class="col-span-6 sm:col-span-4 ">
+                      <div class="col-span-6 sm:col-span-3 ">
                         <label
                           for="Product Price"
                           class="block text-sm font-medium text-gray-700"
@@ -130,7 +165,7 @@ const AddProduct = () => {
                           Product Category
                         </label>
                         <select
-                          {...register("category", {
+                          {...register("category_id", {
                             required: "category require",
                           })}
                           autocomplete="country-name"
@@ -139,9 +174,11 @@ const AddProduct = () => {
                           <option className="selected disabled:">
                             Product Category
                           </option>
-                          <option>BedRoom</option>
-                          <option>Kitchen</option>
-                          <option>BathRoom</option>
+                          {categories.map((category) => (
+                            <option value={category._id}>
+                              {category.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div class="col-span-6 sm:col-span-6 lg:col-span-2">

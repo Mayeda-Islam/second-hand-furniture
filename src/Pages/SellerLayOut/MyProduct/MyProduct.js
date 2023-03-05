@@ -63,6 +63,9 @@ const MyProduct = () => {
               <th scope="col" class="px-6 py-3">
                 Action
               </th>
+              <th scope="col" class="px-6 py-3">
+                advertise in home
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -78,19 +81,24 @@ const MyProduct = () => {
                 <td class="px-6 py-4">
                   {product.quantity > 0 ? "Available" : "Sold"}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-2 py-4">
                   <div>
-                    <button onClick={() => handleDeleteProduct(product._id)}>
+                    <button
+                      className="btn btn-link"
+                      onClick={() => handleDeleteProduct(product._id)}
+                    >
                       delete
                     </button>
-                    <button
-                      className="btn"
-                      disabled={product.isAdvertising}
-                      onClick={() => handleAdvertise(product)}
-                    >
-                      Advertise
-                    </button>
                   </div>
+                </td>
+                <td class="px-2 py-4">
+                  <button
+                    className="btn btn-link"
+                    disabled={product.isAdvertising}
+                    onClick={() => handleAdvertise(product)}
+                  >
+                    Advertise
+                  </button>
                 </td>
               </tr>
             ))}

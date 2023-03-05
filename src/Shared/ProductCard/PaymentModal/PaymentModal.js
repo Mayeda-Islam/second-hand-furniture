@@ -22,7 +22,7 @@ const PaymentModal = React.forwardRef(({ orderInfo }, ref) => {
         if (data.acknowledged) {
           toast.success("Order place successfully");
           orderModalRef.current.click();
-          payModalRef.current.click();
+          // payModalRef.current.click();
         }
       });
   };

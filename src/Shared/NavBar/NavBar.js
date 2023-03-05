@@ -88,7 +88,7 @@ const NavBar = () => {
               )}
               {user?.role === "seller" && (
                 <li>
-                  <Link to={"/buyer/addProduct"}>DashBoard</Link>
+                  <Link to={"/seller/addProduct"}>DashBoard</Link>
                 </li>
               )}
 
@@ -113,7 +113,7 @@ const NavBar = () => {
                   <Link to="/">Home</Link>
                 </li>
                 <li tabIndex={0}>
-                  <Link to="blogs">Blogs</Link>
+                  <Link to="/blogs">Blogs</Link>
                 </li>
                 {user?.role === "admin" && (
                   <li>
@@ -132,7 +132,7 @@ const NavBar = () => {
                 )}
                 {user?.role === "seller" && (
                   <li>
-                    <Link to={"/buyer/addProduct"}>DashBoard</Link>
+                    <Link to={"/seller/addProduct"}>DashBoard</Link>
                   </li>
                 )}
                 {user?.email ? (

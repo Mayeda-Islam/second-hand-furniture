@@ -8,7 +8,7 @@ import ProductCard from "../ProductCard/ProductCard";
 const Products = ({ products }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { user } = useContext(AuthContext);
-  console.log(user);
+
   const handleAddToFav = (productId) => {
     if (user.userEmail) {
       const favItem = {
@@ -35,7 +35,7 @@ const Products = ({ products }) => {
     }
   };
 
-  const { data: favProductsByUser = [], refetch } = useQuery({
+  const { data: favProductsByUser = [], refetch: refetchFavByUser } = useQuery({
     queryKey: ["favProductsByUser"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/favorite/${user.email}`);
@@ -49,7 +49,7 @@ const Products = ({ products }) => {
       <div className=" grid grid-cols-2">
         {products.map((product) => (
           <ProductCard
-            refetch={refetch}
+            refetchFavByUser={refetchFavByUser}
             favProductsByUser={favProductsByUser}
             handleAddToFav={handleAddToFav}
             setSelectedProduct={setSelectedProduct}

@@ -82,11 +82,11 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/buyer",
+    path: "/seller",
     element: <SellerLayOut></SellerLayOut>,
     children: [
-      { path: "/buyer/addProduct", element: <AddProduct></AddProduct> },
-      { path: "/buyer/myProduct", element: <MyProduct></MyProduct> },
+      { path: "/seller/addProduct", element: <AddProduct></AddProduct> },
+      { path: "/seller/myProduct", element: <MyProduct></MyProduct> },
     ],
   },
 ]);
