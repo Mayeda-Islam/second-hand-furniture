@@ -26,10 +26,11 @@ const AdvertisingProducts = () => {
     },
   });
   return (
-    <section>
+    <section className="my-20">
       <h3 className="text-3xl my-4 font-bold">Advertising section</h3>
+      <hr />
       {advertiseProducts?.length ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20">
           {advertiseProducts.map((product) => (
             <ProductCard
               setSelectedProduct={setSelectedProduct}

@@ -11,11 +11,12 @@ import img9 from "../../../assests/advertise/img9.jpg";
 
 const Gallery = () => {
   return (
-    <div className="">
-      <h1 className="text-center font-bold py-10 mt-5 text-3xl dark:text-white">
+    <div className=" ">
+      <h1 className="text-center font-bold py-4 mt-5 text-3xl dark:text-white">
         Our Product Gallery
       </h1>
-      <div className="container lg:px-32 px-4 py-8 mx-auto items-center ">
+      <hr />
+      <div className="mt-10 container lg:px-32 px-4 py-8 mx-auto items-center ">
         <div className="grid grid-cols-1 lg:grid-cols-4 lg:grid-rows-4 lg:grid-flow-col gap-2">
           <div className="w-full col-span-2 row-span-2">
             <img
