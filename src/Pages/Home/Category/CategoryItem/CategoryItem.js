@@ -9,7 +9,7 @@ const CategoryItem = ({ category }) => {
         <figure>
           <img src={img} className="w-full" alt="Shoes" />
         </figure>
-        <div className="card-body  lg:pl-25 mt-20">
+        <div className="card-body ">
           <div className="card-actions flex flex-col mt-8">
             <h2 className="card-title">{name}</h2>
             <button className="btn btn-primary">

@@ -1,17 +1,17 @@
 import React from "react";
-import logo from '../../assests/logo.png'
+import logo from "../../assests/logo.png";
 const Footer = () => {
   return (
     <div className="">
       <footer className="footer container mx-auto p-10 bg-accent text-neutral-content">
         <div>
-        <img src={logo} alt="" />
+          <img src={logo} alt="" />
           <p>
             ACME Industries Ltd.
             <br />
             Providing reliable tech since 1992
           </p>
-          <p> Copyright © 2023 - All right reserved</p>
+          <p> Copyright ©MAYEDA ISLAM 2023 - All right reserved</p>
         </div>
         <div>
           <span className="footer-title">Social</span>
