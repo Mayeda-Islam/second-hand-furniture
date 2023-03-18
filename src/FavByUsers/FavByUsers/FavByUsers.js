@@ -12,7 +12,9 @@ const FavByUsers = () => {
   const { data: favProductsByUser = [], refetch: refetchFavByUser } = useQuery({
     queryKey: ["favProductsByUser"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/favorite/${user.email}`);
+      const res = await fetch(
+        `https://assignment-12-server-nine-virid.vercel.app/favorite/${user.email}`
+      );
       const data = await res.json();
       return data;
     },

@@ -28,7 +28,7 @@ const ProductCard = ({
       productId: id,
       email: userEmail,
     };
-    fetch(`http://localhost:5000/favorite`, {
+    fetch(`https://assignment-12-server-nine-virid.vercel.app/favorite`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -44,9 +44,12 @@ const ProductCard = ({
       });
   };
   const handleFavByUserDelete = (id) => {
-    fetch(`http://localhost:5000/favorite/${id}/${userEmail}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://assignment-12-server-nine-virid.vercel.app/favorite/${id}/${userEmail}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
@@ -57,7 +60,7 @@ const ProductCard = ({
       });
   };
   // const handleAddToFav = (id, userEmail) => {
-  //   fetch(`http://localhost:5000/products/favorite/${id}`, {
+  //   fetch(`https://assignment-12-server-nine-virid.vercel.app/products/favorite/${id}`, {
   //     method: "PATCH",
   //     headers: {
   //       "content-type": "application/json",
@@ -69,43 +72,41 @@ const ProductCard = ({
   //   console.log(id, userEmail);
   // };
   return (
-    <div>
-      <div className="card  w-96 bg-base-100 shadow-xl">
-        <figure>
-          <img src={img} alt="Shoes" />
-        </figure>
-        <div className="card-body">
-          <div className="flex justify-between items-center">
-            <h2 className="card-title">
-              {productName}
-              <div className="badge badge-secondary">verified</div>
-            </h2>
-            {favProductsByUser?.find(
-              (favProduct) => favProduct.productId === _id
-            ) ? (
-              <FcLike onClick={() => handleFavByUserDelete(_id)}></FcLike>
-            ) : (
-              <MdFavoriteBorder
-                onClick={() => handleAddToFav(_id)}
-              ></MdFavoriteBorder>
-            )}
-          </div>
+    <div className="card justify-self-center  w-[95%] bg-base-100 shadow-xl">
+      <figure>
+        <img src={img} alt="Shoes" />
+      </figure>
+      <div className="card-body">
+        <div className="flex justify-between items-center">
+          <h2 className="card-title">
+            {productName}
+            <div className="badge badge-secondary">verified</div>
+          </h2>
+          {favProductsByUser?.find(
+            (favProduct) => favProduct.productId === _id
+          ) ? (
+            <FcLike onClick={() => handleFavByUserDelete(_id)}></FcLike>
+          ) : (
+            <MdFavoriteBorder
+              onClick={() => handleAddToFav(_id)}
+            ></MdFavoriteBorder>
+          )}
+        </div>
 
-          <div className="text-justify">
-            <p>Years of use:{yearsOfUse}</p>
-            <p>Location: {location}</p>
-            <p>Original Price:{originalPrice} $</p>
-            <p>Resale Price:{resalePrice} $</p>
-          </div>
-          <div className="card-actions justify-end">
-            <label
-              htmlFor="my-modal-5"
-              className="badge badge-outline"
-              onClick={() => setSelectedProduct(product)}
-            >
-              Buy Now
-            </label>
-          </div>
+        <div className="text-justify">
+          <p>Years of use:{yearsOfUse}</p>
+          <p>Location: {location}</p>
+          <p>Original Price:{originalPrice} $</p>
+          <p>Resale Price:{resalePrice} $</p>
+        </div>
+        <div className="card-actions justify-end">
+          <label
+            htmlFor="my-modal-5"
+            className="badge badge-outline"
+            onClick={() => setSelectedProduct(product)}
+          >
+            Buy Now
+          </label>
         </div>
       </div>
     </div>

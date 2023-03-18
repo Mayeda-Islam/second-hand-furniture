@@ -5,7 +5,7 @@ import PaymentForm from "./PaymentForm";
 const PaymentModal = React.forwardRef(({ orderInfo }, ref) => {
   const { orderModalRef, payModalRef } = ref;
   const handlePlaceOrder = (data) => {
-    fetch(`http://localhost:5000/orders`, {
+    fetch(`https://assignment-12-server-nine-virid.vercel.app/orders`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

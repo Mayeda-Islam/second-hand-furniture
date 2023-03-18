@@ -24,7 +24,7 @@ const OrderInfoModal = ({ product, setSelectedProduct }) => {
       paymentStatus: "unpaid",
     };
     if (paymentType === "pay_later" || paymentType === "cash_on_delivery") {
-      fetch(`http://localhost:5000/orders`, {
+      fetch(`https://assignment-12-server-nine-virid.vercel.app/orders`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

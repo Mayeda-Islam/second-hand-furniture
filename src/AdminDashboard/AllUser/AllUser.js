@@ -6,23 +6,28 @@ const AllUser = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users`);
+      const res = await fetch(
+        `https://assignment-12-server-nine-virid.vercel.app/users`
+      );
       const data = await res.json();
       console.log("inside", data);
       return data;
     },
   });
   const handleRoleUpdate = (user, role) => {
-    fetch(`http://localhost:5000/users/role/${user._id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        role: role,
-      }),
-    })
+    fetch(
+      `https://assignment-12-server-nine-virid.vercel.app/users/role/${user._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          role: role,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

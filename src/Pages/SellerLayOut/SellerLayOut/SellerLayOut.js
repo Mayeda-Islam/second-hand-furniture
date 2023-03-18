@@ -1,24 +1,42 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import NavBar from "../../../Shared/NavBar/NavBar";
 
 const SellerLayOut = () => {
+  let activeStyle = {
+    color: "white",
+    marginBottom: "8px",
+  };
   return (
-    <div className="container mx-auto">
-      <NavBar></NavBar>
-      <div className="drawer drawer-mobile">
+    <div>
+      <div className="shadow-sm">
+        <NavBar></NavBar>
+      </div>
+
+      <div className="drawer drawer-mobile shadow-2xl">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content ">
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side shadow-xl">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80  bg-base-100 text-base-content">
+          <ul className="menu p-4 w-80  mt-4 text-base-content">
             <li>
-              <Link to={"/seller/addProduct"}>Add Product</Link>
+              <NavLink
+                to={"/seller/addProduct"}
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Add Product
+              </NavLink>
             </li>
             <li>
-              <Link to={"/seller/myProduct"}>My Product</Link>
+              <NavLink
+                className=""
+                to={"/seller/myProduct"}
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                My Product
+              </NavLink>
             </li>
           </ul>
         </div>

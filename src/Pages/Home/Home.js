@@ -2,15 +2,19 @@ import React from "react";
 import AdvertisingProducts from "./Advertise/AdvertisingProducts";
 import Banner from "./Banner/Banner";
 import Category from "./Category/Category";
+import ContactMe from "./ContactMe/ContactMe";
 import Gallery from "./Gallery/Gallery";
+import OurServices from "./OurServices/OurServices";
 
 const Home = () => {
   return (
-    <div className=" container mx-auto">
+    <div>
       <Banner></Banner>
       <AdvertisingProducts></AdvertisingProducts>
       <Gallery></Gallery>
       <Category></Category>
+      <OurServices></OurServices>
+      <ContactMe></ContactMe>
     </div>
   );
 };

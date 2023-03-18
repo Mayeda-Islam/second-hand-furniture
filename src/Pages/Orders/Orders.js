@@ -28,7 +28,7 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders?.map((order) => (
               <BookingOrders
                 handlePaymentButton={handlePaymentButton}
                 orderInfo={order}

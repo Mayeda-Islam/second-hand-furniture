@@ -46,10 +46,10 @@ const MyProduct = () => {
 
   return (
     <div>
-      <div class="relative  overflow-x-auto shadow-md sm:rounded-lg">
+      <div class="relative mx-20 my-24 overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400">
-            <tr>
+            <tr className="">
               <th scope="col" class="px-6 py-3">
                 Product name
               </th>
@@ -63,14 +63,14 @@ const MyProduct = () => {
               <th scope="col" class="px-6 py-3">
                 Action
               </th>
-              <th scope="col" class="px-6 py-3">
-                advertise in home
+              <th scope="col" class="px-6 py-3 text-center">
+                advertise
               </th>
             </tr>
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <tr class="bg-white  border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th
                   scope="row"
                   class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -81,7 +81,7 @@ const MyProduct = () => {
                 <td class="px-6 py-4">
                   {product.quantity > 0 ? "Available" : "Sold"}
                 </td>
-                <td class="px-2 py-4">
+                <td class="px-2 py-4 ">
                   <div>
                     <button
                       className="btn btn-link"
@@ -91,14 +91,16 @@ const MyProduct = () => {
                     </button>
                   </div>
                 </td>
-                <td class="px-2 py-4">
-                  <button
-                    className="btn btn-link"
-                    disabled={product.isAdvertising}
-                    onClick={() => handleAdvertise(product)}
-                  >
-                    Advertise
-                  </button>
+                <td>
+                  <div className="flex justify-center">
+                    <button
+                      className="btn btn-link"
+                      disabled={product.isAdvertising}
+                      onClick={() => handleAdvertise(product)}
+                    >
+                      Advertise
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

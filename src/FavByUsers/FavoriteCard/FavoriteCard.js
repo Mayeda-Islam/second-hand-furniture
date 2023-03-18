@@ -12,7 +12,7 @@ const FavoriteCard = ({
     queryKey: ["favProduct", fav.productId],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products/${fav.productId}`
+        `https://assignment-12-server-nine-virid.vercel.app/products/${fav.productId}`
       );
       const data = await res.json();
       return data;

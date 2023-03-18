@@ -6,17 +6,20 @@ const PaymentLaterModal = React.forwardRef(
   ({ orderInfo, revalidator }, ref) => {
     console.log(orderInfo._id, "order id");
     const handlePlaceOrder = (data) => {
-      fetch(`http://localhost:5000/orders/${orderInfo._id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          paymentStatus: "paid",
-          transactionId: data.transactionId,
-          paymentAmount: data.paymentAmount,
-        }),
-      })
+      fetch(
+        `https://assignment-12-server-nine-virid.vercel.app/orders/${orderInfo._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            paymentStatus: "paid",
+            transactionId: data.transactionId,
+            paymentAmount: data.paymentAmount,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {

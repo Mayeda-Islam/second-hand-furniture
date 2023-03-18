@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/Auth/AuthProvider";
 import OrderInfoModal from "../../../Shared/ProductCard/PaymentModal/OrderInfoModal";
 import ProductCard from "../../../Shared/ProductCard/ProductCard";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const AdvertisingProducts = () => {
   const { user } = useContext(AuthContext);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -20,17 +21,25 @@ const AdvertisingProducts = () => {
   const { data: favProductsByUser = [], refetch: refetchFavByUser } = useQuery({
     queryKey: ["favProductsByUser"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/favorite/${user.email}`);
+      const res = await fetch(
+        `https://assignment-12-server-nine-virid.vercel.app/favorite/${user.email}`
+      );
       const data = await res.json();
       return data;
     },
   });
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <section className="my-20">
+    <section className="my-20 container mx-auto">
       <h3 className="text-3xl my-4 font-bold">Advertising section</h3>
       <hr />
       {advertiseProducts?.length ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20">
+        <div
+          data-aos="fade-right"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-20 justify-center"
+        >
           {advertiseProducts.map((product) => (
             <ProductCard
               setSelectedProduct={setSelectedProduct}

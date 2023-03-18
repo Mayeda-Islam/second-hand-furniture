@@ -8,11 +8,12 @@ import { AuthContext } from "../../../context/Auth/AuthProvider";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
-  console.log("imgbb", process.env.REACT_APP_imgbb_key);
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/categories`);
+      const res = await axios.get(
+        `https://assignment-12-server-nine-virid.vercel.app/categories`
+      );
       const data = await res.data;
       return data;
     },
@@ -60,20 +61,21 @@ const AddProduct = () => {
     <div>
       <div class="mt-10 ">
         <div class="mt-10 sm:mt-0">
-          <div class="px-4 sm:px-0">
-            <h3 class="text-xl mb-4 font-medium leading-6 text-gray-900">
-              Add Product
-            </h3>
-          </div>
-          <div class=" mx-auto w-3/4 md:grid md:grid-cols-2 md:gap-6">
+          <div class="px-4 sm:px-0"></div>
+          <div class=" mx-auto   w-3/4 md:grid md:grid-cols-2 md:gap-6">
             <div class="mt-5  md:col-span-2 md:mt-0">
               <form
+                className="shadow-2xl px-24 py-16 
+                "
                 onSubmit={handleSubmit(handleAddProduct)}
                 action="#"
                 method="POST"
               >
-                <div class="overflow-hidden shadow sm:rounded-md">
-                  <div class="bg-primary px-4 py-5 sm:p-6">
+                <h3 class="text-4xl  font-medium leading-6 text-gray-900">
+                  Add Product
+                </h3>
+                <div class="overflow-hidden ">
+                  <div class="bg-transparent px-4 py-5 sm:p-6">
                     <div class="grid text-start grid-cols-6 gap-6">
                       <div class="col-span-6 sm:col-span-4">
                         <label
@@ -257,10 +259,10 @@ const AddProduct = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                  <div class="px-4 py-3 text-right sm:px-6">
                     <button
                       type="submit"
-                      class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      class="inline-flex justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Submit
                     </button>

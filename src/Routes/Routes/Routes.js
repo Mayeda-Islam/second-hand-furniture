@@ -45,9 +45,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) => {
-          console.log("inside of params", params);
+          console.log(params);
           return fetch(
-            `http://localhost:5000/products/category/${params.categoryId}`
+            `https://assignment-12-server-nine-virid.vercel.app/products/category/${params?.categoryId}`
           );
         },
       },
@@ -72,7 +72,9 @@ export const router = createBrowserRouter([
         path: "/orders",
         element: <Orders></Orders>,
         loader: async () => {
-          return fetch(`http://localhost:5000/orders`);
+          return fetch(
+            `https://assignment-12-server-nine-virid.vercel.app/orders`
+          );
         },
       },
       {
