@@ -41,10 +41,7 @@ const Banner = () => {
               ❯
             </a>
           </div>
-          <div
-            className="absolute 
-           backdrop-opacity-30 backdrop-invert bg-primary/30 p-20 text-white top-1/2 right-1/2"
-          >
+          <div className="absolute translate-x-1/2 -translate-y-1/2  backdrop-opacity-30 backdrop-invert bg-primary/30 p-20 text-white top-1/2 right-1/2">
             <h1 className="text-4xl font-medium text-white">
               Second Hand Furniture
             </h1>

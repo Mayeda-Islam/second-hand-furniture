@@ -1,5 +1,6 @@
 import React from "react";
 import AdvertisingProducts from "./Advertise/AdvertisingProducts";
+import AllReviews from "./AllReviews/AllReviews";
 import Banner from "./Banner/Banner";
 import Category from "./Category/Category";
 import ContactMe from "./ContactMe/ContactMe";
@@ -14,6 +15,8 @@ const Home = () => {
       <Gallery></Gallery>
       <Category></Category>
       <OurServices></OurServices>
+
+      <AllReviews></AllReviews>
       <ContactMe></ContactMe>
     </div>
   );
